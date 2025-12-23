@@ -1,3 +1,25 @@
+class MenuItemModel {
+  final String name;
+  final double price;
+  final String image;
+  int quantity; // This will track state in the UI
+
+  MenuItemModel({
+    required this.name,
+    required this.price,
+    required this.image,
+    this.quantity = 0,
+  });
+
+  factory MenuItemModel.fromJson(Map<String, dynamic> json) {
+    return MenuItemModel(
+      name: json['name'] ?? '',
+      price: (json['price'] as num).toDouble(),
+      image: json['image'] ?? '',
+    );
+  }
+}
+
 class RestaurantModel {
   final String id;
   final String title;
@@ -6,7 +28,8 @@ class RestaurantModel {
   final String reviews;
   final String distance;
   final String time;
-  final String category; // 'fastest' or 'recommended'
+  final String category;
+  final List<MenuItemModel> menu;
 
   RestaurantModel({
     required this.id,
@@ -17,6 +40,7 @@ class RestaurantModel {
     required this.distance,
     required this.time,
     required this.category,
+    required this.menu,
   });
 
   factory RestaurantModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +53,9 @@ class RestaurantModel {
       distance: json['distance'] ?? '',
       time: json['time'] ?? '',
       category: json['category'] ?? '',
+      menu: (json['menu'] as List?)
+          ?.map((item) => MenuItemModel.fromJson(item))
+          .toList() ?? [],
     );
   }
 }

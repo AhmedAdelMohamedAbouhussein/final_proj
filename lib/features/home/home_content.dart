@@ -74,21 +74,20 @@ class _HomeContentState extends State<HomeContent> {
             reviews: item.reviews,
             distance: item.distance,
             time: item.time,
-            onTap: () => _openDetailPage(context, item.title, item.image),
+            // FIX: Pass the 'item' object itself, not strings
+            onTap: () => _openDetailPage(context, item),
           );
         },
       ),
     );
   }
 
-  void _openDetailPage(BuildContext context, String name, String image) {
+  // FIX: Ensure the signature matches what is called in onTap
+  void _openDetailPage(BuildContext context, RestaurantModel restaurant) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => RestaurantDetailPage(
-          restaurantName: name,
-          restaurantImage: image,
-        ),
+        builder: (_) => RestaurantDetailPage(restaurant: restaurant),
       ),
     );
   }

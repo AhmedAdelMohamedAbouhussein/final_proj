@@ -1,4 +1,4 @@
-import 'package:final_proj/core/models/home_service.dart';
+import 'package:final_proj/features/home/homeLogic/home_service.dart';
 import 'package:final_proj/core/models/restaurant_model.dart';
 import 'package:final_proj/core/network/ApiResult.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
